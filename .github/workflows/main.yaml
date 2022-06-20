@@ -4,10 +4,18 @@ on: push
 
 jobs: 
   build:
-    runs-on: ubuntu-18.04
+    runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.2
+        uses: actions/checkout@v3
+        
+      - name: Set default Xamarin SDK versions
+        run: |
+          $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --android=12.2
+      - name: Setup .NET Core SDK 5.0.x
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '5.0.x'
         
       - name: Android
         run: |
