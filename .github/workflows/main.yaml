@@ -8,6 +8,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        
+      - name: Directory
+        run: ls
+
 
       - name: Setup NuGet.Config
         run: echo '<configuration><packageSources><add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" /></packageSources></configuration>' > ~/.config/NuGet/NuGet.Config
@@ -23,6 +27,6 @@ jobs:
       - name: Android
         run: |
           nuget restore
-          cd FlensaApp
-          cd FlensaApp.Android
-          msbuild FlensaApp.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
+          cd FlensaAPP
+          cd FlensaAPP.Android
+          msbuild FlensaAPP.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
