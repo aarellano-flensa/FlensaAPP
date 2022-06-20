@@ -2,28 +2,27 @@ name: CI on Xamarin Android project
 
 on: push
 
-jobs: 
+jobs:
   build:
     runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Setup NuGet.Config
         run: echo '<configuration><packageSources><add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" /></packageSources></configuration>' > ~/.config/NuGet/NuGet.Config
-        
+      
       - name: Set default Xamarin SDK versions
         run: |
           $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --android=12.2
-          
       - name: Setup .NET Core SDK 5.0.x
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '5.0.x'
-        
+
       - name: Android
         run: |
           nuget restore
-          cd FlensaAPP
-          cd FlensaAPP.Android
-          msbuild FlensaAPP.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
+          cd FlensaApp
+          cd FlensaApp.Android
+          msbuild FlensaApp.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
