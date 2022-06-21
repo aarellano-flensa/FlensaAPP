@@ -20,7 +20,7 @@ jobs:
       - name: Update Android version Manifest action
         uses: damienaicheh/update-android-version-manifest-action@v1.0.0
         with:
-          android-manifest-path: './FlensaAPP/FlensaAPP.Android/Properties/AndroidManifest.xml'
+          android-manifest-path: './FlensaAPP.Android/Properties/AndroidManifest.xml'
           version-code: ${{ github.run_number }}
           version-name: ${{ secrets.APP_VERSION }}
           print-file: true
@@ -40,7 +40,7 @@ jobs:
       - name: Android
         run: |
           nuget restore
-          cd FlensaAPP
+          # cd FlensaAPP
           cd FlensaAPP.Android
           msbuild /t:SignAndroidPackage /p:Configuration=Release /p:AndroidPackageFormat=apk /p:AndroidKeyStore=true /p:AndroidSigningKeyAlias=flensakeystore /p:AndroidSigningKeyPass='${{ secrets.KEYSTORE_PASSWORD }}' /P:AndroidSigningKeyStore=flensakeystore.keystore /p:AndroidSigningStorePass='${{ secrets.KEYSTORE_PASSWORD }}' FlensaAPP.Android.csproj                                                                                                        
           # msbuild FlensaApp.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
@@ -49,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v3.1.0
         with:
           name: Flensa App
-          path: FlensaApp/FlensaApp.Android/bin/Release/com.companyname.flensaapp-Signed.apk
+          path: FlensaApp.Android/bin/Release/com.companyname.flensaapp-Signed.apk
