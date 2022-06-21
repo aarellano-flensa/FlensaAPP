@@ -12,7 +12,7 @@ jobs:
       - name: Setup Android Signin
         run: |
           echo "${{ secrets.KEYSTORE }}" > flensakeystore.keystore.asc
-          gpg -d --passphrase "${{ secrets.GPG_PASSWORD }}" --batch flensakeystore.keystore.asc > ./FlensaAPP/FlensaAPP.Android/flensakeystore.keystore
+          gpg -d --passphrase "${{ secrets.GPG_PASSWORD }}" --batch flensakeystore.keystore.asc > /FlensaAPP/FlensaAPP.Android/flensakeystore.keystore
           
       - name: Update Android version Manifest action
         uses: damienaicheh/update-android-version-manifest-action@v1.0.0
